@@ -2,9 +2,14 @@ import os
 import logging
 import shutil
 
-def rm(path:str,flag:str) -> int:
+
+def rm(path: str, flag: str) -> int:
     try:
-        if os.path.isdir(path):
+
+        if path == '/' or path == '..':
+            raise Exception
+
+        elif os.path.isdir(path):
             if flag == '-r':
                 shutil.rmtree(path)
             elif flag != '':

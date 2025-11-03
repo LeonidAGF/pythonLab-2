@@ -3,6 +3,7 @@ import logging
 from src.cat_function import cat
 from src.cd_function import cd
 from src.cp_function import cp
+from src.history_function import history, history_write
 from src.ls_function import ls
 from src.mv_function import mv
 from src.parse_command import parse_command
@@ -18,6 +19,11 @@ def main() -> None:
 
     logging.basicConfig(level=logging.DEBUG, filename="shell.log", filemode="a", datefmt='%Y-%m-%d %H:%M:%S',
                         format="[%(asctime)s] %(levelname)s %(message)s")
+
+
+    open(".history",'a').close()
+    path_history_file = os.path.abspath('.history')
+
 
     print('Здравствуйте '+os.getlogin())
     print('Текущая директория: '+os.getcwd())
@@ -62,6 +68,11 @@ def main() -> None:
                     zip_file(parsed_cmd[1],parsed_cmd[2])
                 case 'unzip':
                     un_zip_file(parsed_cmd[1],parsed_cmd[2])
+                case 'history':
+                    history(int(parsed_cmd[1]),path_history_file)
+
+            history_write(command,path_history_file)
+
         except Exception:
             logging.error("Error in writing the command")
 
