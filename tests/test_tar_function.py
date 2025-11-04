@@ -6,8 +6,8 @@ from src.tar_function import tar_file, un_tar_file
 
 def test_tar_function():
     """
-        Тесты с неправильными командами
+        Тесты команд tar и untar
     """
-    assert tar_file('./','test3.gz')==0
-    assert un_tar_file('test3.gz',os.path.abspath('testdir/'))==0
-    rm('test3.gz','-r')
+    assert tar_file('./', 'test3.gz') == 0
+    assert un_tar_file('test3.gz', os.path.abspath('testdir/')) == 0
+    rm('test3.gz', '-r')

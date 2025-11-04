@@ -5,8 +5,8 @@ import os
 
 def un_tar_file(path: str, path_to: str) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду untar, разархивирует tar архив
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
         t = tarfile.open(path, 'r:gz')
@@ -21,8 +21,8 @@ def un_tar_file(path: str, path_to: str) -> int:
 
 def tar_file(path: str,name:str) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду tar, создаёт tar архив
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
         t = tarfile.open(path+'/'+name, 'w:gz')

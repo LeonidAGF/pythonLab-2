@@ -7,8 +7,8 @@ from src.constants import HISTORY_FILE_PATH
 
 def history(n: int) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду history, выводит в консоль n последних команд
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
 
@@ -25,11 +25,11 @@ def history(n: int) -> int:
 
 def history_write(command: str) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду history, записывает выполненную команду в файл .history
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        open(HISTORY_FILE_PATH, 'w').close()
+        open(HISTORY_FILE_PATH, 'a').close()
         data: list() = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
         last_num: int = 1
         if len(data) > 0:

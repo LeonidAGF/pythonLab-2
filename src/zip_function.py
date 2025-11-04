@@ -5,8 +5,8 @@ import logging
 
 def zip_file(from_path: str, to_path: str) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду zip, создаёт zip архив
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
         z = ZipFile(to_path, 'w')
@@ -23,8 +23,8 @@ def zip_file(from_path: str, to_path: str) -> int:
 
 def un_zip_file(from_path: str, to_path: str) -> int:
     """
-    Точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    функция реализующая команду zip, разархивирует zip архив
+    :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
         z = ZipFile(from_path, 'r')
