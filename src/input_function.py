@@ -37,7 +37,7 @@ def input_function(command: str) -> int:
                 if len(parsed_cmd) == 1:
                     ls('', '')
                 elif len(parsed_cmd) == 2:
-                    ls('', parsed_cmd[1])
+                    ls(parsed_cmd[1], '')
                 else:
                     ls(parsed_cmd[2], parsed_cmd[1])
             case 'mv':
