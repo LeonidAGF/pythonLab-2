@@ -149,7 +149,7 @@ undo
 
 Выражение zip:
 ```
-zip <path_to_file_to_archive> <name>
+zip <path_to_file_to_archive> <path_to_archive_location>
 ```
 
 Выражение unzip:

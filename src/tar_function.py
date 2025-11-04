@@ -25,10 +25,13 @@ def tar_file(path: str,name:str) -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        t = tarfile.open(path+'/'+name, 'w:gz')
         files_in_directory = os.listdir(path)
+        t = tarfile.open(path+'/'+name, 'w:gz')
+        origin_path: str = os.path.abspath('')
+        os.chdir(path)
         for name_of_file in files_in_directory:
             t.add(name_of_file)
+        os.chdir(origin_path)
         t.close()
     except Exception as e:
         logging.error(e)
