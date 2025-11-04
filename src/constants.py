@@ -1,1 +1,3 @@
-SAMPLE_CONSTANT: int = 10
+import os
+
+HISTORY_FILE_PATH: str = os.path.abspath('')+'/.history'

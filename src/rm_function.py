@@ -6,7 +6,7 @@ import shutil
 def rm(path: str, flag: str) -> int:
     try:
 
-        if path == '/' or path == '..':
+        if path == '/' or path == '..' or path=='.':
             raise Exception
 
         elif os.path.isdir(path):

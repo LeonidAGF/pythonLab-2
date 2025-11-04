@@ -1,6 +1,11 @@
 import logging
 
-def cat(path:str) -> int:
+
+def cat(path: str) -> int:
+    """
+    Точкой входа в приложение
+    :return: Данная функция ничего не возвращает
+    """
     try:
         print(str(open(path).read()))
     except Exception as e:

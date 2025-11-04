@@ -4,6 +4,10 @@ import logging
 
 
 def cp(from_path: str, to_path: str, flag: str) -> int:
+    """
+    Точкой входа в приложение
+    :return: Данная функция ничего не возвращает
+    """
     try:
 
         if os.path.isdir(from_path):
