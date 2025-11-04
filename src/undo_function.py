@@ -12,38 +12,38 @@ def undo() -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        command_list: list() = open(HISTORY_FILE_PATH, 'r').readlines()
-        if len(command_list) - 1 > -1:
+        command_list_from_file: list[str] = open(HISTORY_FILE_PATH, 'r').readlines()
+        if len(command_list_from_file) - 1 > -1:
             command_without_index = 0
-            while command_list[-1][command_without_index] in '0123456789':
+            while command_list_from_file[-1][command_without_index] in '0123456789':
                 command_without_index += 1
-            command: str = command_list[-1][command_without_index:len(command_list[-1])]
-            command_list: list() = parse_command(command)
+            command: str = command_list_from_file[-1][command_without_index:len(command_list_from_file[-1])]
+            command_list: list[str] = parse_command(command)
             if command_list[0] in 'cp mv rm':
                 match command_list[0]:
                     case 'cp':
                         rm(command_list[2], '-r')
                     case 'mv':
                         from_path: str = command_list[1]
-                        name: str = ''
+                        mv_name: str = ''
                         if len(from_path) > 0:
                             while len(from_path) > 0 and from_path[-1] != '/' and from_path[-1] != '\\':
-                                name = from_path[-1] + name
+                                mv_name = from_path[-1] + mv_name
                                 from_path = from_path[0:len(from_path) - 1]
                         if from_path == '':
                             from_path = './'
                         if command_list[2][-1] != '\\' or command_list[2][-1] != '/':
                             command_list[2] += '/'
-                        mv(command_list[2] + name, from_path)
+                        mv(command_list[2] + mv_name, from_path)
                     case 'rm':
-                        from_path: str = command_list[1]
-                        name: str = ''
-                        while len(from_path) > 0 and from_path[-1] != '/' and from_path[-1] != '\\':
-                            name = from_path[-1] + name
-                            from_path = from_path[0:len(from_path) - 1]
-                        if from_path == '':
-                            from_path = './'
-                        mv(TRASH_FILE_PATH + '/' + name, from_path + name)
+                        rm_from_path: str = command_list[1]
+                        rm_name: str = ''
+                        while len(rm_from_path) > 0 and rm_from_path[-1] != '/' and rm_from_path[-1] != '\\':
+                            rm_name = rm_from_path[-1] + rm_name
+                            rm_from_path = rm_from_path[0:len(rm_from_path) - 1]
+                        if rm_from_path == '':
+                            rm_from_path = './'
+                        mv(TRASH_FILE_PATH + '/' + rm_name, rm_from_path + rm_name)
     except Exception as e:
         logging.error(e)
         return 1

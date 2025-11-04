@@ -1,6 +1,5 @@
 import os
 import logging
-import shutil
 
 from src.constants import TRASH_FILE_PATH
 from src.mv_function import mv

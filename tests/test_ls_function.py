@@ -5,7 +5,7 @@ from src.ls_function import ls
 
 def test_ls_function():
     """
-        Тесты с неправильными командами
+        Тесты команды ls
     """
     assert ls('', '') == 0
     assert ls('', '-l') == 0

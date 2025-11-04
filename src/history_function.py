@@ -1,5 +1,3 @@
-import os.path
-import shutil
 import logging
 
 from src.constants import HISTORY_FILE_PATH
@@ -12,7 +10,7 @@ def history(n: int) -> int:
     """
     try:
 
-        data: list() = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
+        data: list[str] = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
         for command in data[-n:len(data)]:
             print(command.replace('\n', ''))
 
@@ -30,7 +28,7 @@ def history_write(command: str) -> int:
     """
     try:
         open(HISTORY_FILE_PATH, 'a').close()
-        data: list() = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
+        data: list[str] = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
         last_num: int = 1
         if len(data) > 0:
             last_num = int(data[-1].split()[0]) + 1

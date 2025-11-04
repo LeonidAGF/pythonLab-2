@@ -1,7 +1,7 @@
 import re
 
 
-def parse_command(command: str) -> list():
+def parse_command(command: str) -> list[str]:
     """
     функция parse_command, превращает команду, введённую пользователем, в массив токенов.
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0

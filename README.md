@@ -12,11 +12,37 @@
     ├── lab                                                                     # Кодовая база лабораторной работ
     │   ├── src/                                                                # Исходный код
     │       ├── main.py                                                         # Главный исполняемый файл
+    │       ├── cat_function.py                                                 # Реализация команды cat
+    │       ├── cd_function.py                                                  # Реализация команды cd
+    │       ├── cp_function.py                                                  # Реализация команды cp
+    │       ├── grep_function.py                                                # Реализация команды grep
+    │       ├── history_function.py                                             # Реализация команды history
+    │       ├── input_function.py                                               # Реализация функции input_function
+    │       ├── ls_function.py                                                  # Реализация команды ls
+    │       ├── mv_function.py                                                  # Реализация команды mv
+    │       ├── parse_command.py                                                # Реализация функции parse_command
+    │       ├── rm_function.py                                                  # Реализация команды rm
+    │       ├── tar_function.py                                                 # Реализация команд tar untar
+    │       ├── undo_function.py                                                # Реализация команды undo
+    │       ├── zip_function.py                                                 # Реализация команд zip unzip
     │       ├── constants.py                                                    # константы
     │   ├── tests/                                                              # Unit тесты
-    │       ├── test_1.py                                                       # Unit тесты 1
+    │       ├── test_cat_function.py                                            # Тесты для команды cat
+    │       ├── test_cd_function.py                                             # Тесты для команды cd
+    │       ├── test_cp_function.py                                             # Тесты для еоманды cp
+    │       ├── test_grep_function.py                                           # Тесты для команды grep
+    │       ├── test_history_function.py                                        # Тесты для команды history
+    │       ├── test_incorrect_tests.py                                         # Тесты с неправильными командами
+    │       ├── test_input_function.py                                          # Тесты функции input_function
+    │       ├── test_ls_function.py                                             # Тесты команды ls
+    │       ├── test_mv_function.py                                             # Тесты команды mv
+    │       ├── test_parse_function.py                                          # Тесты функции parse_command
+    │       ├── test_rm_function.py                                             # Тесты команды rm
+    │       ├── test_tar_function.py                                            # Тесты команд tar и untar
+    │       ├── test_undo_function.py                                           # Тесты команды undo
+    │       ├── test_zip_function.py                                            # Тесты команд zip и unzip
     │   ├── uv.lock                                                             # зависимости проекта
-    │   ├── requirements.txt                                                     
+    │   ├── requirements.txt
     │   ├── .gitignore                                                          # git ignore файл
     │   ├──.pre-commit-config.yaml                                              # Средства автоматизации проверки кодстайла
     │   ├── README.md                                                           # Описание проекта
@@ -42,57 +68,99 @@
 
 <h2>Что было необходимо сделать</h2>
 
-...
+Было необходимо создать мини-оболочку с командами для работы с файловой системой. Список команд которые нужно было реализовать: cat, cd, cp, grep, history, ls, mv, rm, tar, untar, undo, zip ,unzip
 
 <h2>Как было реализованно</h2>
 
-...
+Была реализованна функция input_function, которая получает на вход команду введённую пользователем, преобразует её в массив токенов (название команды, пути к файлам или каталогам, опции, паттерны для команды grep) и вызывает необходимую функцию, реализованную в одном из файлов в папке src.
 
 <h2>Какие операции были реализованны</h2>
 
-- `ls` ...
-- `cd` ...
-- `cat` ...
-- `cp` ...
-- `mv` ...
-- `rm` ...
-- `zip` ...
-- `unzip` ...
-- `tar` ...
-- `untar` ...
-- `grep` ...
-- `history` ...
-- `undo` ...
+- `ls` просмотр файлов и каталогов
+- `cd` переход в выбранный каталог
+- `cat` просмотр содержимого файла
+- `cp` коприрование файла или каталога
+- `mv` перемещение файла или каталога
+- `rm` удаление файла или каталога
+- `zip` архивация в zip архив
+- `unzip` разархивация zip архива
+- `tar` архивация в tar архив
+- `untar` разархивация tar архива
+- `grep` поиск соответствий шаблону в содержимом файлов
+- `history` просмотр истории ввода команд
+- `undo` отмена действия операций cp rm mv
 
-<h2>Примеры работы</h2>
+<h2>Шаблоны команд для ввода</h2>
 
-Выражение поступающее на вход:
+Выражение ls:
 ```
-ls
-```
-Результат полученный на выходе:
-```
-...
+ls <options> <path>
 ```
 
-Выражение поступающее на вход:
+Выражение cat:
 ```
-cd
-```
-Результат полученный на выходе:
-```
-....
+cat <path>
 ```
 
-Выражение поступающее на вход:
+Выражение cd:
 ```
-cat
+cd <path>
 ```
-Результат полученный на выходе:
+
+Выражение cp:
 ```
-....
+cp <options> <path_copy_from> <path_copy_to>
+```
+
+Выражение grep:
+```
+grep <options> <path> <pattern>
+```
+
+Выражение history:
+```
+history <amount>
+```
+
+Выражение mv:
+```
+mv <path_from> <path_to>
+```
+
+Выражение rm:
+```
+rm <options> <path>
+```
+
+Выражение tar:
+```
+tar <path_to_file_to_archive> <name>
+```
+
+Выражение untar:
+```
+untar <path_to_archive> <path_to_untar_location>
+```
+
+Выражение undo:
+```
+undo
+```
+
+Выражение zip:
+```
+zip <path_to_file_to_archive> <name>
+```
+
+Выражение unzip:
+```
+unzip <path_to_archive> <path_to_unzip_location>
 ```
 
 <h2>Допущения</h2>
 
 - Нельзя вводить больше одной команды за раз
+
+- ls -l выводит такие права как право на чтение (r), изменение (w) и выполнение (x) файла
+
+- сообщения об ошибках не выводятся в консоль, а сохраняются только в shell.log
