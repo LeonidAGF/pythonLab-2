@@ -1,11 +1,12 @@
 import os
 import logging
+import re
 
-from src.constants import TRASH_FILE_PATH
+from src.constants import TRASH_FILE_PATH, WRITING_COMMAND_ERROR
 from src.mv_function import mv
 
 
-def rm(path: str, flag: str) -> int:
+def rm(path: str) -> int:
     """
     функция реализующая команду rm, перемещает файл или католог в католог .trash
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
@@ -14,18 +15,8 @@ def rm(path: str, flag: str) -> int:
         if os.path.isdir(TRASH_FILE_PATH)==0:
             os.mkdir(TRASH_FILE_PATH)
 
-        if path == '/' or path == '..' or path=='.' or path=='':
-            raise Exception
-
-        #elif os.path.isdir(path):
-        #    if flag == '-r':
-        #        shutil.rmtree(path)
-        #    elif flag != '':
-        #        raise Exception('Error in writing the command')
-        #    else:
-        #        os.rmdir(path)
-        #else:
-        #    os.remove(path)
+        if len(path)==0 or path == '/' or path== '\\' or path == '..' or path == '.' or path == '' or (re.search(r'[A-Z]:(?:\\|/)', path) and len(path) == 3):
+            raise Exception(WRITING_COMMAND_ERROR)
 
         mv(path,TRASH_FILE_PATH)
 
@@ -35,24 +26,17 @@ def rm(path: str, flag: str) -> int:
     logging.info('rm ' + path)
     return 0
 
-def rm_with_permission(path: str, flag: str) -> int:
+def rm_with_permission(path: str) -> int:
     """
     функция реализующая команду rm, перемещает файл или католог в католог .trash, получив согласие пользователя
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
         answer:str = str(input('Удалить '+path+'? (y/n)'))
-        if 'y'==answer:
-            if os.path.isdir(TRASH_FILE_PATH)==0:
-                os.mkdir(TRASH_FILE_PATH)
-
-            if path == '/' or path == '..' or path=='.' or path=='':
-                raise Exception
-
-            mv(path,TRASH_FILE_PATH)
+        if answer=='y':
+            rm(path)
 
     except Exception as e:
         logging.error(e)
         return 1
-    logging.info('rm ' + path)
     return 0

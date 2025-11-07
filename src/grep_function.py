@@ -2,6 +2,8 @@ import logging
 import os
 import re
 
+from src.constants import WRITING_COMMAND_ERROR
+
 
 def grep(pattern:str, path:str, flags:list[str]) -> int:
     """
@@ -10,6 +12,9 @@ def grep(pattern:str, path:str, flags:list[str]) -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
+
+        if '-i' not in flags and '-r' not  in flags and len(flags)>0:
+            raise Exception(WRITING_COMMAND_ERROR)
 
         if path[-1]!='/' and path[-1]!='\\':
             path+='/'

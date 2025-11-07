@@ -10,4 +10,4 @@ def test_tar_function():
     """
     assert tar_file('./', 'test3.gz') == 0
     assert un_tar_file('test3.gz', os.path.abspath('testdir/')) == 0
-    rm('test3.gz', '-r')
+    rm('test3.gz')

@@ -2,6 +2,8 @@ import os.path
 import shutil
 import logging
 
+from src.constants import WRITING_COMMAND_ERROR
+
 
 def cp(from_path: str, to_path: str, flag: str) -> int:
     """
@@ -14,7 +16,7 @@ def cp(from_path: str, to_path: str, flag: str) -> int:
             if flag == '-r':
                 shutil.copytree(from_path, to_path)
             elif flag != '':
-                raise Exception('Error in writing the command')
+                raise Exception(WRITING_COMMAND_ERROR)
             else:
                 os.mkdir(to_path)
         else:

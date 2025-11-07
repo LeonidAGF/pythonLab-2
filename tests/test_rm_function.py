@@ -7,5 +7,5 @@ def test_rm_function():
     """
         Тесты команды rm
     """
-    assert rm('tests/test2.zip', '-r') == 0
-    assert rm(os.path.abspath('.history'), '') == 0
+    assert rm('tests/test2.zip') == 0
+    assert rm(os.path.abspath('.history')) == 0

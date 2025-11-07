@@ -9,8 +9,9 @@ def history(n: int) -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-
-        data: list[str] = [str(el) for el in open(HISTORY_FILE_PATH, 'r')]
+        file = open(HISTORY_FILE_PATH, 'r')
+        data: list[str] = [str(el) for el in file]
+        file.close()
         for command in data[-n:len(data)]:
             print(command.replace('\n', ''))
 

@@ -9,14 +9,18 @@ def zip_file(from_path: str, to_path: str) -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        files_in_directory = os.listdir(from_path)
-        z = ZipFile(to_path, 'w')
+        files_in_directory:list[str] = os.listdir(from_path)
+
+        zip:ZipFile = ZipFile(to_path, 'w')
+
         origin_path:str = os.path.abspath('')
+
         os.chdir(from_path)
         for name_of_file in files_in_directory:
-            z.write(name_of_file)
+            zip.write(name_of_file)
+
         os.chdir(origin_path)
-        z.close()
+        zip.close()
     except Exception as e:
         logging.error(e)
         return 1
@@ -30,9 +34,9 @@ def un_zip_file(from_path: str, to_path: str) -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        z = ZipFile(from_path, 'r')
-        z.extractall(to_path)
-        z.close()
+        zip:ZipFile = ZipFile(from_path, 'r')
+        zip.extractall(to_path)
+        zip.close()
     except Exception as e:
         logging.error(e)
         return 1

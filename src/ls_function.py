@@ -2,6 +2,8 @@ import logging
 import os
 import datetime
 
+from src.constants import WRITING_COMMAND_ERROR
+
 
 def ls(path: str, flag: str) -> int:
     """
@@ -30,7 +32,7 @@ def ls(path: str, flag: str) -> int:
                     os.path.getmtime(file_path)).strftime('%d.%m.%Y %H:%M:%S') + ' ' + str(
                     os.path.getsize(file_path)) + ' byte ' + res
             elif flag != '':
-                raise Exception('Error in writing the command')
+                raise Exception(WRITING_COMMAND_ERROR)
             print(res)
     except Exception as e:
         logging.error(e)

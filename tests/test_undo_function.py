@@ -13,10 +13,10 @@ def test_undo_function():
     history_write('cp pyproject.toml t1')
     assert undo() == 0
     cp('pyproject.toml', 't2','')
-    rm('t2','')
+    rm('t2')
     history_write('rm t2')
     assert undo() == 0
     mv('t2','.trash')
     history_write('mv t2 .trash')
     assert undo() == 0
-    rm('t2', '')
+    rm('t2')

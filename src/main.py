@@ -9,8 +9,7 @@ def main() -> None:
     :return: Данная функция ничего не возвращает
     """
 
-    logging.basicConfig(level=logging.DEBUG, filename="shell.log", filemode="a", datefmt='%Y-%m-%d %H:%M:%S',
-                        format="[%(asctime)s] %(levelname)s %(message)s")
+    logging.basicConfig(level=logging.DEBUG, filename="shell.log", filemode="a", datefmt='%Y-%m-%d %H:%M:%S',format="[%(asctime)s] %(levelname)s %(message)s")
 
     print('Здравствуйте ' + os.getlogin())
     print('Текущая директория: ' + os.getcwd())

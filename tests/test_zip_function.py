@@ -10,4 +10,4 @@ def test_zip_function():
     """
     assert zip_file('testdir', 'test4.zip') == 0
     assert un_zip_file(os.path.abspath('test4.zip'), 'testdir/zpdir/') == 0
-    rm('test4.zip', '-r')
+    rm('test4.zip')

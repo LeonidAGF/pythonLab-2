@@ -12,17 +12,28 @@ def undo() -> int:
     :return: возращает 1 если при выполнении произошла ошибка, иначе возвращет 0
     """
     try:
-        command_list_from_file: list[str] = open(HISTORY_FILE_PATH, 'r').readlines()
-        if len(command_list_from_file) - 1 > -1:
+        file = open(HISTORY_FILE_PATH, 'r')
+
+        command_list_from_file: list[str] = file.readlines()
+
+        file.close()
+
+        if len(command_list_from_file) > 0:
+
             command_without_index = 0
             while command_list_from_file[-1][command_without_index] in '0123456789':
                 command_without_index += 1
+
             command: str = command_list_from_file[-1][command_without_index:len(command_list_from_file[-1])]
             command_list: list[str] = parse_command(command)
+
             if command_list[0] in 'cp mv rm':
+
                 match command_list[0]:
+
                     case 'cp':
-                        rm(command_list[2], '-r')
+                        rm(command_list[2])
+
                     case 'mv':
                         from_path: str = command_list[1]
                         mv_name: str = ''
@@ -35,6 +46,7 @@ def undo() -> int:
                         if command_list[2][-1] != '\\' or command_list[2][-1] != '/':
                             command_list[2] += '/'
                         mv(command_list[2] + mv_name, from_path)
+
                     case 'rm':
                         rm_from_path: str = command_list[1]
                         rm_name: str = ''
@@ -44,8 +56,11 @@ def undo() -> int:
                         if rm_from_path == '':
                             rm_from_path = './'
                         mv(TRASH_FILE_PATH + '/' + rm_name, rm_from_path + rm_name)
+
     except Exception as e:
+
         logging.error(e)
         return 1
+
     logging.info('undo')
     return 0
