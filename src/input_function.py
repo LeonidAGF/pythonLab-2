@@ -50,6 +50,8 @@ def input_function(command: str) -> int:
                     raise Exception
                 elif len(parsed_cmd) == 1:
                     ls('', '')
+                elif len(parsed_cmd) == 2 and parsed_cmd[1]=='-l':
+                    ls('', parsed_cmd[1])
                 elif len(parsed_cmd) == 2:
                     ls(parsed_cmd[1], '')
                 else:
